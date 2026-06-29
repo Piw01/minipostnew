@@ -17,13 +17,13 @@
             
             <div class="row g-3 mt-4">
                 <div class="col-md-6 col-xl-4">
-                    <div class="p-3 border-bottom border-secondary bg-dark bg-opacity-10">
+                    <div class="ds-status-box">
                         <div class="text-uppercase ds-text-fix small style-track" style="letter-spacing: 1px; font-size: 0.75rem;">CARGO ITEMS AVAILABLE</div>
                         <div class="fs-1 fw-bold text-neon-blue mt-1">{{ $jumlah_produk }} <span class="fs-6 ds-text-fix fw-normal">Units</span></div>
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-4">
-                    <div class="p-3 border-bottom border-secondary bg-dark bg-opacity-10">
+                    <div class="ds-status-box">
                         <div class="text-uppercase ds-text-fix small style-track" style="letter-spacing: 1px; font-size: 0.75rem;">DELIVERY SUCCESS RATE</div>
                         <div class="fs-1 fw-bold text-neon-orange mt-1">100<span class="fs-4 text-neon-orange">%</span></div>
                     </div>

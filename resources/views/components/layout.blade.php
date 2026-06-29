@@ -24,8 +24,8 @@
             --neon-blue-shadow: rgba(0, 210, 255, 0.3);
             --neon-orange-shadow: rgba(255, 159, 26, 0.3);
             --sidebar-active-bg: linear-gradient(90deg, rgba(0,212,255,0.1) 0%, rgba(0,0,0,0) 100%);
+            --bg-status-box: rgba(255, 255, 255, 0.03); /* WARNA BOX DI DARK MODE */
         }
-
         /* ==========================================================================
            2. VARIABEL WARNA (TEMA TERANG: BRIDGES STANDARD)
            ========================================================================== */
@@ -37,11 +37,12 @@
             --text-main: #212529;
             --text-muted: #495057;
             --card-bg: rgba(255, 255, 255, 0.85);
-            --neon-blue: #0066cc; /* Biru tegas */
-            --neon-orange: #d97706; /* Oranye pekat */
+            --neon-blue: #0066cc;
+            --neon-orange: #d97706;
             --neon-blue-shadow: rgba(0, 102, 204, 0.15);
             --neon-orange-shadow: rgba(217, 119, 6, 0.15);
             --sidebar-active-bg: linear-gradient(90deg, rgba(0,102,204,0.08) 0%, rgba(0,0,0,0) 100%);
+            --bg-status-box: rgba(0, 0, 0, 0.05); /* WARNA BOX DI LIGHT MODE */
         }
 
         /* ==========================================================================
@@ -117,12 +118,12 @@
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
-        .ds-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
-            background-color: var(--neon-blue);
-        }
+            .ds-card::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; width: 4px; height: 100%;
+                background-color: var(--neon-blue);
+            }
         
         .text-neon-blue {
             color: var(--neon-blue);
@@ -134,24 +135,28 @@
             text-shadow: 0 0 8px var(--neon-orange-shadow);
         }
 
-        /* ==========================================================================
-           CUSTOM OVERRIDE UNTUK TABEL BRIDGES (PERBAIKAN PERMANEN)
-           ========================================================================== */
+        .ds-text-fix {
+            color: var(--text-muted) !important;
+        }
+
         .ds-table {
             border-color: var(--border-color) !important;
             background-color: transparent !important;
         }
+
         .ds-table th {
             color: var(--neon-orange) !important;
             border-bottom: 2px solid var(--border-color) !important;
             background-color: transparent !important;
         }
+
         /* Memaksa background td transparan agar warna ds-card di bawahnya yang nembus */
         .ds-table td {
             color: var(--text-main) !important;
             border-bottom: 1px solid var(--border-color) !important;
             background-color: transparent !important; 
         }
+
         /* Mengatur warna hover baris agar serasi di kedua mode */
         .ds-table tbody tr:hover td {
             background-color: rgba(0, 210, 255, 0.05) !important;
@@ -164,6 +169,15 @@
             padding-top: 20px;
             border-top: 1px dashed var(--border-color);
         }
+
+        .ds-status-box {
+            padding: 1rem;
+            border-bottom: 2px solid var(--border-color);
+            background-color: var(--bg-status-box) !important;
+            transition: background-color 0.3s ease;
+        }    
+
+
     </style>
 </head>
 <body>
