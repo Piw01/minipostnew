@@ -38,7 +38,7 @@ class ProdukController extends Controller
         // Kembalikan ke halaman utama kargo dengan pesan sukses
         return redirect('/produk')->with('success', 'New Cargo Registered Successfully!');
     }
-    
+
     // 4. Menampilkan Form Edit Kargo
     public function edit($id)
     {
@@ -73,4 +73,5 @@ class ProdukController extends Controller
 
         return redirect('/produk')->with('success', 'Cargo Decommissioned Successfully!');
     }
+    
 }
