@@ -20,7 +20,7 @@ class CheckRole
         }
 
         // 2. Cek apakah role user saat ini ada di dalam daftar role yang diizinkan rute
-        if (in_box(auth()->user()->role, $roles)) {
+        if (in_array(auth()->user()->role, $roles)) {
             return $next($request); // Lolos, silakan masuk rute
         }
 
