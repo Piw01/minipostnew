@@ -185,7 +185,10 @@
         <div class="sidebar-sub">Bridges Network v2.0</div>
         
         <a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">⚠️ DASHBOARD MAP</a>
+        
+        @if(auth()->user()->role === 'admin' || auth()->user()->role === 'kepala toko')
         <a href="{{ url('/produk') }}" class="{{ Request::is('produk*') ? 'active' : '' }}">📦 CARGO MANAGEMENT</a>
+        @endif
         <a href="{{ url('/transaksi') }}" class="{{ Request::is('transaksi*') ? 'active' : '' }}">🛒 DELIVERY ORDERS</a>
         <form action="{{ url('/logout') }}" method="POST" class="mt-2">
             @csrf

@@ -26,12 +26,14 @@ Route::middleware('auth')->group(function () {
     // Rute Dashboard Utama
     Route::get('/', [HomeController::class, 'index']);
 
-    // Rute Manajemen Kargo Produk (CRUD)
-    Route::get('/produk', [ProdukController::class, 'index']);
-    Route::get('/produk/create', [ProdukController::class, 'create']);
-    Route::post('/produk/store', [ProdukController::class, 'store']);
-    Route::get('/produk/{id}/edit', [ProdukController::class, 'edit']);
-    Route::post('/produk/{id}/update', [ProdukController::class, 'update']);
-    Route::get('/produk/{id}/delete', [ProdukController::class, 'destroy']);
     
+    // Rute Manajemen Kargo Produk (CRUD)
+    Route::middleware('role:admin,kepala toko')->group(function () {
+        Route::get('/produk', [ProdukController::class, 'index']);
+        Route::get('/produk/create', [ProdukController::class, 'create']);
+        Route::post('/produk/store', [ProdukController::class, 'store']);
+        Route::get('/produk/{id}/edit', [ProdukController::class, 'edit']);
+        Route::post('/produk/{id}/update', [ProdukController::class, 'update']);
+        Route::get('/produk/{id}/delete', [ProdukController::class, 'destroy']);
+    });    
 });
