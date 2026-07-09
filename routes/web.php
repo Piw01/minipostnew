@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     
     // Memproses fungsi keluar dari aplikasi
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
+    
     // Rute Dashboard Utama
     Route::get('/', [HomeController::class, 'index']);
 
@@ -35,5 +35,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/produk/{id}/edit', [ProdukController::class, 'edit']);
         Route::post('/produk/{id}/update', [ProdukController::class, 'update']);
         Route::get('/produk/{id}/delete', [ProdukController::class, 'destroy']);
+        // Rute untuk membuka aplikasi kasir
+        Route::get('/transaksi', [\App\Http\Controllers\TransaksiController::class, 'create']);
+
     });    
 });
