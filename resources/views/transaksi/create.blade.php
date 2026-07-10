@@ -62,7 +62,7 @@
                         <input type="number" name="bayar" id="input-bayar" class="form-control bg-transparent border-secondary fs-5" required onkeyup="calculateChange()" onchange="calculateChange()" style="color: var(--text-main) !important;">
                     </div>
 
-                    <div class="mb-4 p-3 shadow-sm border-left-success" style="background: rgba(40, 167, 69, 0.08); border-left: 3px solid #28a745;">
+                    <div class="mb-4 p-3 shadow-sm" style="background: rgba(40, 167, 69, 0.08); border-left: 3px solid #28a745;">
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="fw-bold small tracking-wider" style="color: var(--text-main);">CHANGE (KEMBALIAN):</span>
                             <span class="fw-bold text-success fs-4" id="display-kembalian">Rp 0</span>
@@ -117,7 +117,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom border-secondary border-opacity-25">
                         <div class="pe-2">
                             <div class="fw-bold mb-1" style="font-size: 0.9rem; color: var(--text-main);">${item.name}</div>
-                            <div class="small" style="color: var(--text-muted);">${item.qty} Unit(s) x Rp ${item.price.toLocaleString('id-ID')}</div>
+                            <div class="small" style="font-size: 0.8rem; color: var(--text-muted);">${item.qty} Unit(s) x Rp ${item.price.toLocaleString('id-ID')}</div>
                         </div>
                         <div class="text-end">
                             <div class="text-neon-orange fw-bold mb-2">Rp ${subtotal.toLocaleString('id-ID')}</div>

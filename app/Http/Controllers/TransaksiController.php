@@ -32,7 +32,7 @@ class TransaksiController extends Controller
         DB::transaction(function () use ($request) {
             
             // 1. Membuat Kode Nota Otomatis Unik (Contoh: TR-20260710-XYZ)
-            $kodeTransaksi = 'TR-' . date('Ymd') . '-' . strtoupper(str_random(4));
+            $kodeTransaksi = 'TR-' . date('Ymd') . '-' . strtoupper(\Illuminate\Support\Str::random(4));
 
             // 2. Simpan Data ke Tabel Utama 'transaksis'
             $transaksi = Transaksi::create([
@@ -73,5 +73,11 @@ class TransaksiController extends Controller
 
         // Jika lolos tanpa Exception eror, kembalikan ke kasir dengan pesan sukses
         return redirect('/transaksi')->with('success', 'Chiral Cargo Transaction Committed Successfully!');
+    }
+    public function index()
+    {
+        // Memanggil data transaksi terbaru beserta data kasir (Eager Loading)
+        $transaksi = Transaksi::with('user')->latest()->get();
+        return view('transaksi.index', compact('transaksi'));
     }
 }
