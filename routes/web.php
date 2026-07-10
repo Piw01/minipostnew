@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/produk/{id}/delete', [ProdukController::class, 'destroy']);
         // Rute untuk membuka aplikasi kasir
         Route::get('/transaksi', [\App\Http\Controllers\TransaksiController::class, 'create']);
+        // Rute memproses penyimpanan data dari kasir (POST)
+        Route::post('/transaksi/store', [\App\Http\Controllers\TransaksiController::class, 'store']);
 
     });    
 });
