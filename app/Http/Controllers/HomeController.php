@@ -14,10 +14,10 @@ class HomeController extends Controller
         $totalPendapatan = Transaksi::sum('total');
 
         // 2. Hitung jumlah total pengiriman/nota transaksi yang tercipta
-        $jumlahTransaksi = Transaksi::count();
+        $jumlahTransaksi = Transaksi::count('id');
 
         // 3. Hitung berapa banyak jenis komoditas produk di gudang
-        $totalProduk = Produk::count();
+        $totalProduk = Produk::count('id');
 
         // Kirim ketiga variabel statistik ke halaman depan dasbor
         return view('home', compact('totalPendapatan', 'jumlahTransaksi', 'totalProduk'));

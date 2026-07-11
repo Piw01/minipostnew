@@ -104,4 +104,48 @@ class TransaksiController extends Controller
         $transaksi = Transaksi::with(['user', 'detailTransaksi.produk'])->findOrFail($id);
         return view('transaksi.print', compact('transaksi'));
     }
+    // Membuat file CSV instan dari data transaksi yang terfilter
+    public function export(Request $request)
+    {
+        $query = Transaksi::with('user');
+
+        if ($request->filled('tanggal_mulai')) {
+            $query->whereDate('created_at', '>=', $request->tanggal_mulai);
+        }
+        if ($request->filled('tanggal_selesai')) {
+            $query->whereDate('created_at', '<=', $request->tanggal_selesai);
+        }
+
+        $transaksi = $query->latest()->get();
+        $filename = "Bridges_Manifest_Report_" . date('Y-m-d_H-i-s') . ".csv";
+        
+        $headers = [
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$filename",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        ];
+
+        $callback = function() use($transaksi) {
+            $file = fopen('php://output', 'w');
+            
+            // ⚡ Perhatikan tanda ';' di ujung fungsi fputcsv
+            fputcsv($file, ['WAKTU TRANSAKSI', 'KODE TRANSAKSI', 'OPERATOR KASIR', 'GRAND TOTAL', 'NOMINAL BAYAR', 'KEMBALIAN'], ';');
+
+            foreach ($transaksi as $row) {
+                fputcsv($file, [
+                    $row->created_at->format('Y-m-d H:i:s'),
+                    $row->kode_transaksi,
+                    $row->user->name ?? 'Unknown',
+                    $row->total,
+                    $row->bayar,
+                    $row->kembalian
+                ], ';'); // ⚡ Kita kunci pemisahnya menggunakan titik koma di sini
+            }
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }

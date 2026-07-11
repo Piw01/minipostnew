@@ -1,6 +1,15 @@
 <x-layout>
     <x-slot:title>Bridges Terminal - Transaction History</x-slot:title>
 
+    <!-- TRICK CSS: Memaksa Ikon Kalender Bawaan Browser Terlihat Terang & Mudah Diklik -->
+    <style>
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1) sepia(1) saturate(5) hue-rotate(175deg); /* Mengubah ikon menjadi warna neon-blue */
+            cursor: pointer;
+            padding: 5px;
+        }
+    </style>
+
     <div class="mb-4 d-flex justify-content-between align-items-center">
         <div>
             <span class="text-neon-blue text-uppercase fw-bold tracking-wide" style="font-size: 0.8rem; letter-spacing: 2px;">
@@ -34,6 +43,10 @@
                 <button type="submit" class="btn btn-outline-info rounded-0 fw-bold w-100 tracking-wider">
                     🔍 FILTER NETWORK
                 </button>
+                <!-- ⚡ TOMBOL DOWNLOAD EKSPOR EXCEL BARU -->
+                <a href="{{ url('/transaksi/export?' . http_build_query(request()->all())) }}" class="btn btn-outline-success rounded-0 fw-bold w-100 tracking-wider">
+                    🟢 EXPORT CSV
+                </a>
                 @if(request('tanggal_mulai') || request('tanggal_selesai'))
                     <a href="{{ url('/transaksi/history') }}" class="btn btn-outline-danger rounded-0 fw-bold w-50 tracking-wider">
                         RESET

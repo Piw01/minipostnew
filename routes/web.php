@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\AuthController;
 
 /* ==========================================================================
@@ -13,9 +14,10 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     // Memproses data login yang dikirim
     Route::post('/login', [AuthController::class, 'authenticate']);
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-/* ==========================================================================
+/* ===================================================  =======================
    2. RUTE TERPROTEKSI (AUTH) - WAJIB LOGIN TERLEBIH DAHULU UNTUK MASUK
    ========================================================================== */
 Route::middleware('auth')->group(function () {
@@ -43,5 +45,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/transaksi/history', [\App\Http\Controllers\TransaksiController::class, 'index']);
         // Rute memanggil halaman cetak nota thermal berdasarkan ID transaksi
         Route::get('/transaksi/print/{id}', [\App\Http\Controllers\TransaksiController::class, 'print']);
+        // Rute mendownload laporan spreadsheet berdasarkan filter tanggal
+        Route::get('/transaksi/export', [\App\Http\Controllers\TransaksiController::class, 'export']);
     });    
 });
