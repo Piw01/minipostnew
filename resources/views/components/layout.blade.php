@@ -190,7 +190,8 @@
         <a href="{{ url('/produk') }}" class="{{ Request::is('produk*') ? 'active' : '' }}">
             📦 CARGO MANAGEMENT
         </a>
-        <a href="{{ url('/transaksi/history') }}" class="nav-link text-white my-2 tracking-wider">
+        <!-- Menghapus class text-white agar warnanya redup serasi dengan menu Cargo Management lainnya -->
+        <a href="{{ url('/transaksi/history') }}" class="nav-link my-2 tracking-wider">
             📊 TRANSACTION HISTORY
         </a>
         @endif
