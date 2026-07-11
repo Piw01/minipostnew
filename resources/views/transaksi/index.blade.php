@@ -19,6 +19,30 @@
     </div>
     @endif
 
+    <!-- FORM FILTER RENTANG TANGGAL -->
+    <div class="card ds-card shadow-sm p-3 mb-4">
+        <form action="{{ url('/transaksi/history') }}" method="GET" class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label class="form-label small fw-bold text-neon-blue tracking-wider">START DATE (TANGGAL MULAI)</label>
+                <input type="date" name="tanggal_mulai" value="{{ request('tanggal_mulai') }}" class="form-control bg-transparent border-secondary" style="color: var(--text-main) !important;">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label small fw-bold text-neon-blue tracking-wider">END DATE (TANGGAL SELESAI)</label>
+                <input type="date" name="tanggal_selesai" value="{{ request('tanggal_selesai') }}" class="form-control bg-transparent border-secondary" style="color: var(--text-main) !important;">
+            </div>
+            <div class="col-md-4 d-flex gap-2">
+                <button type="submit" class="btn btn-outline-info rounded-0 fw-bold w-100 tracking-wider">
+                    🔍 FILTER NETWORK
+                </button>
+                @if(request('tanggal_mulai') || request('tanggal_selesai'))
+                    <a href="{{ url('/transaksi/history') }}" class="btn btn-outline-danger rounded-0 fw-bold w-50 tracking-wider">
+                        RESET
+                    </a>
+                @endif
+            </div>
+        </form>
+    </div>
+
     <!-- TABEL MANIFEST RIWAYAT -->
     <div class="card ds-card shadow-lg p-3">
         <div class="table-responsive">
@@ -62,7 +86,7 @@
                         <a href="{{ url('/transaksi/print/' . $row->id) }}" target="_blank" class="btn btn-sm btn-outline-warning rounded-0 py-0 px-2 small">
                             🖨️ PRINT
                         </a>
-</td>
+                        </td>
                     </tr>
                     @empty
                     <tr style="background-color: transparent !important;">

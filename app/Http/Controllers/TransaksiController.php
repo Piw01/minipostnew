@@ -75,12 +75,28 @@ class TransaksiController extends Controller
         // Jika lolos tanpa Exception eror, kembalikan ke kasir dengan pesan sukses
         return redirect('/transaksi')->with('success', 'Chiral Cargo Transaction Committed Successfully!');
     }
-    public function index()
+    // Menampilkan daftar seluruh riwayat dengan fitur filter tanggal
+    public function index(Request $request)
     {
-        // Memanggil data transaksi terbaru beserta data kasir (Eager Loading)
-        $transaksi = Transaksi::with('user')->latest()->get();
+        // Membuat query dasar mengambil transaksi beserta data kasir
+        $query = Transaksi::with('user');
+
+        // Jika user mengisi filter tanggal mulai
+        if ($request->filled('tanggal_mulai')) {
+            $query->whereDate('created_at', '>=', $request->tanggal_mulai);
+        }
+
+        // Jika user mengisi filter tanggal selesai
+        if ($request->filled('tanggal_selesai')) {
+            $query->whereDate('created_at', '<=', $request->tanggal_selesai);
+        }
+
+        // Ambil data terbaru berdasarkan hasil filter
+        $transaksi = $query->latest()->get();
+
         return view('transaksi.index', compact('transaksi'));
-    }
+    }    
+    
     // Menyiapkan data manifest nota spesifik untuk dicetak
     public function print($id)
     {

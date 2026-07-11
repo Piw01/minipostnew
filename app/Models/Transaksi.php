@@ -8,15 +8,15 @@ class Transaksi extends Model
 {
     protected $fillable = ['kode_transaksi', 'user_id', 'total', 'bayar', 'kembalian'];
 
-    // Relasi: Satu transaksi memiliki banyak rincian barang yang dibeli (One to Many)
-    public function details()
-    {
-        return $this->hasMany(DetailTransaksi::class, 'transaksi_id');
-    }
-
-    // Relasi: Transaksi ini dicatat oleh seorang user/kasir
+    // Relasi ke User (Kasir)
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
+    }
+
+    // ⚡ TAMBAHKAN FUNGSI INI AGAR ERROR DI CONTROLLER HILANG BERSIH
+    public function detailTransaksi()
+    {
+        return $this->hasMany(DetailTransaksi::class, 'transaksi_id');
     }
 }
