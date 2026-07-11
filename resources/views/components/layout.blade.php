@@ -187,9 +187,16 @@
         <a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">⚠️ DASHBOARD MAP</a>
         
         @if(auth()->user()->role === 'admin' || auth()->user()->role === 'kepala toko')
-        <a href="{{ url('/produk') }}" class="{{ Request::is('produk*') ? 'active' : '' }}">📦 CARGO MANAGEMENT</a>
+        <a href="{{ url('/produk') }}" class="{{ Request::is('produk*') ? 'active' : '' }}">
+            📦 CARGO MANAGEMENT
+        </a>
+        <a href="{{ url('/transaksi/history') }}" class="nav-link text-white my-2 tracking-wider">
+            📊 TRANSACTION HISTORY
+        </a>
         @endif
-        <a href="{{ url('/transaksi') }}" class="{{ Request::is('transaksi*') ? 'active' : '' }}">🛒 DELIVERY ORDERS</a>
+        <a href="{{ url('/transaksi') }}" class="{{ Request::is('transaksi*') ? 'active' : '' }}">
+            🛒 DELIVERY ORDERS
+        </a>
         <form action="{{ url('/logout') }}" method="POST" class="mt-2">
             @csrf
             <button type="submit" class="sidebar-link-btn text-start w-100 bg-transparent border-0" style="color: #ff4d4d; font-size: 0.9rem; padding: 12px 15px; letter-spacing: 1px; cursor: pointer;">

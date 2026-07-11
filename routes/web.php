@@ -41,5 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/transaksi/store', [\App\Http\Controllers\TransaksiController::class, 'store']);
         // Rute riwayat list nota transaksi
         Route::get('/transaksi/history', [\App\Http\Controllers\TransaksiController::class, 'index']);
+        // Rute memanggil halaman cetak nota thermal berdasarkan ID transaksi
+        Route::get('/transaksi/print/{id}', [\App\Http\Controllers\TransaksiController::class, 'print']);
     });    
 });

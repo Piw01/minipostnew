@@ -8,6 +8,7 @@ use App\Models\DetailTransaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class TransaksiController extends Controller
 {
@@ -32,7 +33,7 @@ class TransaksiController extends Controller
         DB::transaction(function () use ($request) {
             
             // 1. Membuat Kode Nota Otomatis Unik (Contoh: TR-20260710-XYZ)
-            $kodeTransaksi = 'TR-' . date('Ymd') . '-' . strtoupper(\Illuminate\Support\Str::random(4));
+            $kodeTransaksi = 'TR-' . date('Ymd') . '-' . strtoupper(\Illuminate\Support\Str::random(10));
 
             // 2. Simpan Data ke Tabel Utama 'transaksis'
             $transaksi = Transaksi::create([
@@ -79,5 +80,12 @@ class TransaksiController extends Controller
         // Memanggil data transaksi terbaru beserta data kasir (Eager Loading)
         $transaksi = Transaksi::with('user')->latest()->get();
         return view('transaksi.index', compact('transaksi'));
+    }
+    // Menyiapkan data manifest nota spesifik untuk dicetak
+    public function print($id)
+    {
+        // Mengambil transaksi berdasarkan ID beserta relasi kasir dan detail produknya
+        $transaksi = Transaksi::with(['user', 'detailTransaksi.produk'])->findOrFail($id);
+        return view('transaksi.print', compact('transaksi'));
     }
 }
